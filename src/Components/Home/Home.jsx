@@ -11,6 +11,20 @@ const Home = () => {
     useEffect(()=>[
         getCities()
     ],[])
+    const columns = [
+        {
+            title: 'Name',
+            dataIndex: 'name',
+        },
+        {
+            title: 'Text',
+            dataIndex: 'text',
+        },
+        {
+            title: 'Images',
+            dataIndex: 'images',
+        }
+    ]
   return (
     <div>
      
