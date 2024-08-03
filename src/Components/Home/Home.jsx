@@ -13,6 +13,14 @@ const Home = () => {
     useEffect(()=>{
         getCities()
      },[])
+
+     const showModal = () =>{
+        setOpen(true)
+     }
+     const closeModal = () =>{
+        setOpen(false)
+     }
+
     const columns = [
         {
             title: 'Number',
@@ -58,11 +66,17 @@ const Home = () => {
     <div className='home'>
         <div className='container home-container'>
             <ul className='home-list'>
-                <Button type='primary' className='home-btn'>Add</Button>
+                <Button type='primary' className='home-btn' onClick={showModal}>Add</Button>
             </ul>
                 <Table columns={columns} dataSource={data}/>
-                <Modal>
+                <Modal open={open}>
                     <Form>
+                        <Form.Item label="Name" name='name'>
+                            <Input/>
+                        </Form.Item>
+                        <Form.Item label="Name" name='name'>
+                            <Input/>
+                        </Form.Item>
                         <Form.Item label="Name" name='name'>
                             <Input/>
                         </Form.Item>
