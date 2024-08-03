@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "./Home.css"
 import axios from 'axios';
+import { Table } from 'antd';
 const Home = () => {
     const [cities,setCities] = useState([]);
     const getCities = () =>{
@@ -27,7 +28,7 @@ const Home = () => {
     ]
   return (
     <div>
-     
+        <Table columns={columns} dataSource={data}/>
     </div>
   )
 }
