@@ -45,12 +45,22 @@ const Home = () => {
                     src={`https://autoapi.dezinfeksiyatashkent.uz/api/uploads/images/${city.image_src}`} 
                     alt={city.name} 
                 />),
-            car:(<><Button type='primary' primary>Edit</Button> <Button type='primary' danger>Delete</Button></>)
+                action: (
+                    <>
+                        <Button type='primary'>Edit</Button> 
+                        <Button type='primary' danger>Delete</Button>
+                    </>
+                )
         }
     ))
   return (
-    <div>
-        <Table columns={columns} dataSource={data}/>
+    <div className='home'>
+        <div className='container home-container'>
+            <ul className='home-list'>
+                <Button type='primary' className='home-btn'>Add</Button>
+            </ul>
+                <Table columns={columns} dataSource={data}/>
+        </div>        
     </div>
   )
 }
