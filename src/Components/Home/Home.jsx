@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Home.css"
 import axios from 'axios';
 const Home = () => {
@@ -8,6 +8,9 @@ const Home = () => {
         .then(res=setCities(res.data.data))
         .catch(err=>console.log(err))
     }
+    useEffect(()=>[
+        getCities()
+    ],[])
   return (
     <div>
      
