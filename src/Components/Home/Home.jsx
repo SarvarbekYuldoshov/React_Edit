@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import "./Home.css"
 import axios from 'axios';
-import { Button, Table } from 'antd';
+import { Button, Form, Input, Modal, Table } from 'antd';
 const Home = () => {
     const [cities,setCities] = useState([]);
+    const [open,setOpen] = useState(false)
     const getCities = () =>{
         axios.get('https://autoapi.dezinfeksiyatashkent.uz/api/cities')
         .then(res=>setCities(res.data.data))
@@ -60,6 +61,13 @@ const Home = () => {
                 <Button type='primary' className='home-btn'>Add</Button>
             </ul>
                 <Table columns={columns} dataSource={data}/>
+                <Modal>
+                    <Form>
+                        <Form.Item label="Name" name='name'>
+                            <Input/>
+                        </Form.Item>
+                    </Form>
+                </Modal>
         </div>        
     </div>
   )
