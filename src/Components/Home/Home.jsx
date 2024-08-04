@@ -107,6 +107,9 @@ const Home = () => {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
             }
         })
+        .then((res)=>{
+            message.success("Uchirildi")
+        })
     }
     return (
         <div className='home'>
