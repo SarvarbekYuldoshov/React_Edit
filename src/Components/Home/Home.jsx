@@ -9,7 +9,7 @@ const Home = () => {
     const [open, setOpen] = useState(false);
     const [image, setImage] = useState(null);
     const navigate = useNavigate();
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem('token');
 
     const getCities = () => {
         axios.get('https://autoapi.dezinfeksiyatashkent.uz/api/cities')
@@ -18,11 +18,12 @@ const Home = () => {
     }
 
     useEffect(() => {
-        if(!token){
-            navigate('/')
+        if (!token) {
+            navigate('/');
+            return;
         }
         getCities();
-    }, []);
+    }, [token, navigate]);
 
     const showModal = () => {
         setOpen(true);
@@ -30,6 +31,47 @@ const Home = () => {
 
     const closeModal = () => {
         setOpen(false);
+    }
+
+    const handleSubmit = (values) => {
+        const formData = new FormData();
+        formData.append('name', values.name);
+        formData.append('text', values.text);
+        formData.append('images', image);
+
+        axios({
+            url: 'https://autoapi.dezinfeksiyatashkent.uz/api/cities',
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            },
+            data: formData,
+        })
+        .then(res => {
+            if (res.data.success) {
+                message.success("Qo'shildi");
+                setOpen(false);
+                getCities();
+            }
+        })
+        .catch(err => console.log(err));
+    }
+    
+    const deleteCities = (id) => {
+        axios({
+            url: `https://autoapi.dezinfeksiyatashkent.uz/api/cities/${id}`,
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+        .then((res) => {
+            message.success("O'chirildi");
+            getCities();
+        })
+        .catch(err => {
+            message.error("Xatolik yuz berdi");
+        });
     }
 
     const columns = [
@@ -70,50 +112,11 @@ const Home = () => {
         action: (
             <>
                 <Button type='primary'>Edit</Button> 
-                <Button type='primary' danger>Delete</Button>
+                <Button type='primary' danger onClick={() => deleteCities(city.id)}>Delete</Button>
             </>
         )
     }));
 
-    const handleSubmit = (values) => {
-        const formData = new FormData();
-        formData.append('name', values.name);
-        formData.append('text', values.text);
-        formData.append('images', image);
-
-        axios({
-            url: 'https://autoapi.dezinfeksiyatashkent.uz/api/cities',
-            method: 'POST',
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`
-            },
-            data: formData
-        })
-        .then(res => {
-            if (res.data.success) {
-                message.success("Qo'shildi");
-                setOpen(false);
-                getCities();
-            }
-        })
-        .catch(err => console.log(err));
-    }
-    
-    const deleteCities = (id) =>{
-        axios({
-            url: `https://autoapi.dezinfeksiyatashkent.uz/api/${id}`,
-            method:'DELETE',
-            headers:{
-                Authorization: `Bearer ${localStorage.getItem('token')}`
-            }
-        })
-        .then((res)=>{
-            message.success("Uchirildi")
-        })
-        .catch(err=>{
-            message.error("Xatolik")
-        })
-    }
     return (
         <div className='home'>
             <div className='container home-container'>
@@ -163,4 +166,5 @@ const Home = () => {
 }
 
 export default Home;
+
 
