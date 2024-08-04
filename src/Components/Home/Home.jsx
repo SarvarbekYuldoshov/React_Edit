@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react';
 import './Home.css';
 import axios from 'axios';
 import { Button, Form, Input, Modal, Table, message } from 'antd';
+import { useNavigate } from 'react-router';
 
 const Home = () => {
     const [cities, setCities] = useState([]);
     const [open, setOpen] = useState(false);
     const [image, setImage] = useState(null);
+    const navigate = useNavigate();
+    const token = localStorage.getItem('token')
 
     const getCities = () => {
         axios.get('https://autoapi.dezinfeksiyatashkent.uz/api/cities')
@@ -15,6 +18,9 @@ const Home = () => {
     }
 
     useEffect(() => {
+        if(!token){
+            navigate('/')
+        }
         getCities();
     }, []);
 
