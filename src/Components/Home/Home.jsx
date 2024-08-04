@@ -98,7 +98,10 @@ const Home = () => {
         })
         .catch(err => console.log(err));
     }
-
+    
+    const deleteCities = (id) =>{
+        axios()
+    }
     return (
         <div className='home'>
             <div className='container home-container'>
