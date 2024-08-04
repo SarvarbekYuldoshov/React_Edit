@@ -110,6 +110,9 @@ const Home = () => {
         .then((res)=>{
             message.success("Uchirildi")
         })
+        .catch(err=>{
+            message.error("Xatolik")
+        })
     }
     return (
         <div className='home'>
