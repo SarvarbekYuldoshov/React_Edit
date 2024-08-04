@@ -71,13 +71,13 @@ const Home = () => {
                 <Table columns={columns} dataSource={data}/>
                 <Modal open={open} footer={null} onCancel={closeModal}>
                     <Form className='home-form'>
-                        <Form.Item label="Name" name='name'>
-                            <Input width={50} placeholder='Name'/>
+                        <Form.Item className='home-item-a' label="Name" name='name'>
+                            <Input className='home-input-a' width={50} placeholder='Name'/>
                         </Form.Item>
-                        <Form.Item label="Text" name='name'>
-                            <Input width={50} placeholder='Text'/>
+                        <Form.Item className='home-item' label="Text" name='name'>
+                            <Input className='home-input' width={50} placeholder='Text'/>
                         </Form.Item>
-                        <Form.Item label="Images" name='name'>
+                        <Form.Item className='home-item-a' label="Images" name='name'>
                             <Input type='file' width={50} placeholder='Images'/>
                         </Form.Item>
                     </Form>
