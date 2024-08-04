@@ -100,7 +100,9 @@ const Home = () => {
     }
     
     const deleteCities = (id) =>{
-        axios()
+        axios({
+            url: `https://autoapi.dezinfeksiyatashkent.uz/api/id`
+        })
     }
     return (
         <div className='home'>
