@@ -10,7 +10,7 @@
 }
 .home-form{
     width: 400px;
-    height: 300px;
+    height: 350px;
 }
 .home-item{
     margin-top: 60px;
@@ -25,4 +25,9 @@
 }
 .home-item-a{
     margin-top: 60px;
+}
+.home-btn-a{
+    width: 344px;
+    margin-left: -78px;
+    margin-top: 50px;
 }

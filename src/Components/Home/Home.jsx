@@ -62,6 +62,26 @@ const Home = () => {
                 )
         }
     ))
+
+    const handleSubmit = (values) =>{
+        const formData = new FormData();
+        formData.append('name',values.name);
+        formData.append('text',values.text);
+        formData.append("image",values.images);
+    
+    axios({
+        url:'https://autoapi.dezinfeksiyatashkent.uz/api/cities',
+        method:'POST',
+        headers:{
+            Authorization:`Bearer ${localStorage.getItem('token')}`
+        },
+        data:formData
+    })
+    .then(res=>{
+        console.log(res);
+    })
+    .catch(err=>console.log(err))
+}
   return (
     <div className='home'>
         <div className='container home-container'>
@@ -74,12 +94,20 @@ const Home = () => {
                         <Form.Item className='home-item-a' label="Name" name='name'>
                             <Input className='home-input-a' width={50} placeholder='Name'/>
                         </Form.Item>
-                        <Form.Item className='home-item' label="Text" name='name'>
+                        <Form.Item className='home-item' label="Text" name='text'>
                             <Input className='home-input' width={50} placeholder='Text'/>
                         </Form.Item>
-                        <Form.Item className='home-item-a' label="Images" name='name'>
+                        <Form.Item className='home-item-a' label="Images" name='images'>
                             <Input type='file' width={50} placeholder='Images'/>
                         </Form.Item>
+                        <Form.Item 
+                            name="remember"
+                            valuePropName="checked"
+                            wrapperCol={{offset: 8,span: 16,
+                        }}
+                        >
+                        <Button className='home-btn-a' htmlType="submit">Submi</Button>
+                       </Form.Item>
                     </Form>
                 </Modal>
         </div>        
