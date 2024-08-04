@@ -101,7 +101,11 @@ const Home = () => {
     
     const deleteCities = (id) =>{
         axios({
-            url: `https://autoapi.dezinfeksiyatashkent.uz/api/id`
+            url: `https://autoapi.dezinfeksiyatashkent.uz/api/${id}`,
+            method:'DELETE',
+            headers:{
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
         })
     }
     return (
