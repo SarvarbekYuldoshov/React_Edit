@@ -10,6 +10,8 @@ const Home = () => {
     const [image, setImage] = useState(null);
     const navigate = useNavigate();
     const token = localStorage.getItem('token');
+    const [currentCity, setCurrentCity] = useState(null);
+    const [form] = Form.useForm();
 
     const getCities = () => {
         axios.get('https://autoapi.dezinfeksiyatashkent.uz/api/cities')
@@ -23,25 +25,33 @@ const Home = () => {
             return;
         }
         getCities();
-    }, [token, navigate]);
+    }, []);
 
-    const showModal = () => {
+    const showModal = (item) => {
         setOpen(true);
+        setCurrentCity(item);
+        form.setFieldsValue(item);
     }
 
     const closeModal = () => {
         setOpen(false);
+        setCurrentCity(null);
+        form.resetFields();
     }
 
     const handleSubmit = (values) => {
         const formData = new FormData();
         formData.append('name', values.name);
         formData.append('text', values.text);
-        formData.append('images', image);
+        if (image) {
+            formData.append('images', image);
+        }
 
         axios({
-            url: 'https://autoapi.dezinfeksiyatashkent.uz/api/cities',
-            method: 'POST',
+            url: currentCity 
+                ? `https://autoapi.dezinfeksiyatashkent.uz/api/cities/${currentCity.id}` 
+                : 'https://autoapi.dezinfeksiyatashkent.uz/api/cities',
+            method: currentCity ? 'PUT' : 'POST',
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
             },
@@ -49,9 +59,11 @@ const Home = () => {
         })
         .then(res => {
             if (res.data.success) {
-                message.success("Qo'shildi");
+                message.success(currentCity ? "O'zgartirildi" : "Qo'shildi");
                 setOpen(false);
                 getCities();
+                form.resetFields();
+                setCurrentCity(null);
             }
         })
         .catch(err => console.log(err));
@@ -111,7 +123,7 @@ const Home = () => {
         ),
         action: (
             <>
-                <Button type='primary'>Edit</Button> 
+                <Button type='primary' onClick={() => showModal(city)}>Edit</Button> 
                 <Button type='primary' danger onClick={() => deleteCities(city.id)}>Delete</Button>
             </>
         )
@@ -121,11 +133,11 @@ const Home = () => {
         <div className='home'>
             <div className='container home-container'>
                 <ul className='home-list'>
-                    <Button type='primary' className='home-btn' onClick={showModal}>Add</Button>
+                    <Button type='primary' className='home-btn' onClick={() => setOpen(true)}>Add</Button>
                 </ul>
                 <Table columns={columns} dataSource={data} />
                 <Modal open={open} footer={null} onCancel={closeModal}>
-                    <Form className='home-form' onFinish={handleSubmit}>
+                    <Form form={form} className='home-form' onFinish={handleSubmit}>
                         <Form.Item 
                             className='home-item-a' 
                             label="Name" 
@@ -146,7 +158,7 @@ const Home = () => {
                             className='home-item-a' 
                             label="Images" 
                             name='images'
-                            rules={[{ required: true, message: 'Please upload an image!' }]}
+                            rules={[{ required: !currentCity, message: 'Please upload an image!' }]}
                         >
                             <Input 
                                 onChange={(e) => setImage(e.target.files[0])} 
@@ -166,5 +178,3 @@ const Home = () => {
 }
 
 export default Home;
-
-
