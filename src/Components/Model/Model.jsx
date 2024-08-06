@@ -58,8 +58,11 @@ const Model = () => {
                 },
         })
         .then(res =>{
-            message.error('')
+            message.success("Uchirildi")
         })
+        .catch(err => {
+            message.error("Xatolik")
+            })
     }
 
     return (
