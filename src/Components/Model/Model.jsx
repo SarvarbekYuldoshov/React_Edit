@@ -6,7 +6,7 @@ import { message } from 'antd';
 const Model = () => {
     const [models, setModels] = useState([]);
     const [brands, setBrands] = useState([]); 
-    const [name,setName] = useState(' ');
+    const [name, setName] = useState('');
     const [brandid, setBrandid] = useState('');
 
     const getModels = () => {
@@ -26,36 +26,38 @@ const Model = () => {
         getBrands();
     }, []);
 
-    const addModel = (e) =>{
+    const addModel = (e) => {
         e.preventDefault();
-        const formData = new FormData()
-        formData.append('name', name)
-        formData.append('brandid', brandid)
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('brandid', brandid);
         axios({
-            url:`https://autoapi.dezinfeksiyatashkent.uz/api/models`,
+            url: 'https://autoapi.dezinfeksiyatashkent.uz/api/models',
             method: 'POST',
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
             },
-            data:formData,
+            data: formData,
         })
-        .then(res =>{
-            if(res.data.success){
-                message.success("Qushildi")
+        .then(res => {
+            if (res.data.success) {
+                message.success("Qushildi");
+                getModels();
             }
         })
-        .catch(err =>{
-            message.error("Xatolik")
-        })
-    }
+        .catch(err => {
+            message.error("Xatolik");
+        });
+    };
 
     return (
         <div>
-            <input type="text" onChange={(e)=>setName(e.target.value)} />
-            <select name="" id="" onChange={(e)=>setBrandid(e.target.value)}>
+            <input type="text" onChange={(e) => setName(e.target.value)} />
+            <select onChange={(e) => setBrandid(e.target.value)}>
+                <option value="">Select Brand</option>
                 {
                     brands && brands.map((brand, index) => (
-                        <option key={index} value={brand.id}>{brand.title}</option> // Added return statement and key attribute
+                        <option key={index} value={brand.id}>{brand.title}</option>
                     ))
                 }
             </select>
@@ -70,7 +72,7 @@ const Model = () => {
                 <tbody>
                     {
                         models && models.map((item, index) => (
-                            <tr key={index}> {}
+                            <tr key={index}>
                                 <td>{item.name}</td>
                                 <td>{item.brand_title}</td>
                             </tr>
