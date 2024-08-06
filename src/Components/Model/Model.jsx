@@ -49,6 +49,15 @@ const Model = () => {
             message.error("Xatolik");
         });
     };
+    const deleteModel = (id) =>{
+        axios:({
+            url: `https://autoapi.dezinfeksiyatashkent.uz/api/models/${id}`,
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+                },
+        })
+    }
 
     return (
         <div className='model'>
