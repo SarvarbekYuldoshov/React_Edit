@@ -24,13 +24,17 @@ const Model = () => {
                         <th>Model</th>
                         <th>Brand</th>
                     </tr>
-                </table>
-            {
+                    {
                 models && models.map((item, index) => (
                     <div key={index}>
+                        <tr>
+                            <th>Model</th>
+                            <th>Brand</th>
+                        </tr>
                     </div>
                 ))
             }
+                </table>
         </div>
     );
 };
