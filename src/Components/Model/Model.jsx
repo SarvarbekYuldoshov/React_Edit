@@ -57,6 +57,9 @@ const Model = () => {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
                 },
         })
+        .then(res =>{
+            message.error('')
+        })
     }
 
     return (
