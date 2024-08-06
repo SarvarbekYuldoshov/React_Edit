@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import "./Model.css";
 import axios from 'axios';
+import { message } from 'antd';
 
 const Model = () => {
     const [models, setModels] = useState([]);
@@ -38,6 +39,14 @@ const Model = () => {
             },
             data:formData,
         })
+        .then(res =>{
+            if(res.data.success){
+                message.success("Qushildi")
+            }
+        })
+        .catch(err =>{
+            message.error("Xatolik")
+        })
     }
 
     return (
@@ -50,7 +59,7 @@ const Model = () => {
                     ))
                 }
             </select>
-            <button>Add</button>
+            <button onClick={addModel}>Add</button>
             <table>
                 <thead>
                     <tr>
