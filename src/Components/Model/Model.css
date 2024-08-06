@@ -1,3 +1,12 @@
-td,th{
-    width: 200px;
+table{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.model-td{
+    width: 250px;
+}
+.model-th{
+    width: 250px;
+    border: 1px solid blue;
 }

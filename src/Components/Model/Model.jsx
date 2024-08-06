@@ -18,18 +18,17 @@ const Model = () => {
 
     return (
         <div>
-            <h1>Models</h1>
                 <table>
                     <tr>
-                        <th>Model</th>
-                        <th>Brand</th>
+                        <th className='model-th'>Model</th>
+                        <th className='model-th'>Brand</th>
                     </tr>
                     {
                 models && models.map((item, index) => (
                     <div key={index}>
                         <tr>
-                            <th>Model</th>
-                            <th>Brand</th>
+                            <td className='model-td'>{item.name}</td>
+                            <td className='model-td'>{item.brand_title}</td>
                         </tr>
                     </div>
                 ))
