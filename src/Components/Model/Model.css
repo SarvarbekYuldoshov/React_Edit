@@ -1,4 +1,51 @@
 th,td{
     width: 250px;
     border: 1px solid blue;
+    height: 30px;
+}
+.model{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.model-input{
+    border: 1px solid blue;
+    width: 250px;
+    height: 40px;
+    margin-left: 2px;
+    text-align: center;
+}
+.model-select{
+    border: 1px solid blue;
+    width: 200px;
+    height: 40px;
+    margin-left: 3px;
+}
+.model-btn{
+    width: 50px;
+    height: 40px;
+    background: blue;
+    color: #FFFF;
+    border: 1px solid blue;
+}
+.model-btn:hover{
+    transform: scale(0.96);
+    transition: 1s;
+    background: red;
+    border: 3px solid #FFFF;
+}
+.model-input:hover{
+    color: #FFFF;
+    text-align: center;
+    transform: scale(0.99);
+    transition: 1s;
+    background: blue;
+    border: 1px solid #FFFF;
+}
+.model-select:hover{
+    color: #FFFF;
+    transform: scale(0.99);
+    transition: 1s;
+    background: blue;
+    border: 1px solid #FFFF;
 }

@@ -30,7 +30,7 @@ const Model = () => {
         e.preventDefault();
         const formData = new FormData();
         formData.append('name', name);
-        formData.append('brandid', brandid);
+        formData.append('brand_id', brandid);
         axios({
             url: 'https://autoapi.dezinfeksiyatashkent.uz/api/models',
             method: 'POST',
@@ -51,9 +51,9 @@ const Model = () => {
     };
 
     return (
-        <div>
-            <input type="text" onChange={(e) => setName(e.target.value)} />
-            <select onChange={(e) => setBrandid(e.target.value)}>
+        <div className='model'>
+            <input className='model-input' type="text" onChange={(e) => setName(e.target.value)} />
+            <select className='model-select' onChange={(e) => setBrandid(e.target.value)}>
                 <option value="">Select Brand</option>
                 {
                     brands && brands.map((brand, index) => (
@@ -61,7 +61,7 @@ const Model = () => {
                     ))
                 }
             </select>
-            <button onClick={addModel}>Add</button>
+            <button className='model-btn' onClick={addModel}>Add</button>
             <table>
                 <thead>
                     <tr>
