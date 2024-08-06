@@ -36,6 +36,7 @@ const Model = () => {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
             },
+            data:formData,
         })
     }
 
