@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import "./Model.css";
 import axios from 'axios';
-import { message } from 'antd';
+import { message, Button } from 'antd';
 
 const Model = () => {
     const [models, setModels] = useState([]);
@@ -49,21 +49,27 @@ const Model = () => {
             message.error("Xatolik");
         });
     };
-    const deleteModel = (id) =>{
-        axios:({
+
+    const deleteModel = (id) => {
+        axios({
             url: `https://autoapi.dezinfeksiyatashkent.uz/api/models/${id}`,
             method: 'DELETE',
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
-                },
+            },
         })
-        .then(res =>{
-            message.success("Uchirildi")
+        .then(res => {
+            message.success("Uchirildi");
+            getModels();
         })
         .catch(err => {
-            message.error("Xatolik")
-            })
-    }
+            message.error("Xatolik");
+        });
+    };
+
+    const showModal = (city) => {
+        console.log('Show modal for:', city);
+    };
 
     return (
         <div className='model'>
@@ -80,8 +86,9 @@ const Model = () => {
             <table>
                 <thead>
                     <tr>
-                        <th>Model</th>
-                        <th>Brand</th>
+                        <th className='th-a'>Model</th>
+                        <th className='th-b'>Brand</th>
+                        <th className='th-c'>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -90,6 +97,10 @@ const Model = () => {
                             <tr key={index}>
                                 <td>{item.name}</td>
                                 <td>{item.brand_title}</td>
+                                <td className='td'>
+                                    <Button className='model-btn-a'  onClick={() => showModal(item)}>Edit</Button> 
+                                    <Button className='model-btn-b' onClick={() => deleteModel(item.id)}>Delete</Button>
+                                </td>
                             </tr>
                         ))
                     }
@@ -100,5 +111,6 @@ const Model = () => {
 };
 
 export default Model;
+
 
 

@@ -49,3 +49,33 @@ th,td{
     background: blue;
     border: 1px solid #FFFF;
 }
+.td{
+    border: none;
+    /* text-align: center; */
+}
+.model-btn-a{
+    background-color: blue;
+    color: #FFFF;
+    border: 1px solid blue;
+    width: 125px;
+    border-radius: 1px;
+}
+.model-btn-b{
+    background-color: red;
+    border: 1px solid red;
+    width: 125px;
+    border-radius: 1px;
+    color: #FFFF;
+}
+.th-a{
+    background-color: rgb(227, 18, 81);
+    color: #FFFF;
+}
+.th-b{
+    background-color: green;
+    color: #FFFF;
+}
+.th-c{
+    background-color: brown;
+    color: #FFFF;
+}
