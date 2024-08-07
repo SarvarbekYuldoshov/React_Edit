@@ -17,22 +17,22 @@ th,td{
 }
 .model-select{
     border: 1px solid blue;
-    width: 200px;
+    width: 250px;
     height: 40px;
     margin-left: 3px;
 }
 .model-btn{
-    width: 50px;
+    width: 250px;
     height: 40px;
     background: blue;
     color: #FFFF;
     border: 1px solid blue;
 }
 .model-btn:hover{
-    transform: scale(0.96);
+    transform: scale(0.99);
     transition: 1s;
     background: red;
-    border: 3px solid #FFFF;
+    border: 1px solid #FFFF;
 }
 .model-input:hover{
     color: #FFFF;

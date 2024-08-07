@@ -8,7 +8,7 @@ const Model = () => {
     const [brands, setBrands] = useState([]); 
     const [name, setName] = useState('');
     const [brandid, setBrandid] = useState('');
-
+    const [hover,setHover] = useState(null)
     const getModels = () => {
         axios.get('https://autoapi.dezinfeksiyatashkent.uz/api/models')
             .then(res => setModels(res.data.data))
@@ -32,8 +32,8 @@ const Model = () => {
         formData.append('name', name);
         formData.append('brand_id', brandid);
         axios({
-            url: 'https://autoapi.dezinfeksiyatashkent.uz/api/models',
-            method: 'POST',
+            url:hover?`https://autoapi.dezinfeksiyatashkent.uz/api/models/${hover.id}`:`https://autoapi.dezinfeksiyatashkent.uz/api/models`,
+            method: hover? 'PUT':'POST',
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
             },
@@ -41,7 +41,7 @@ const Model = () => {
         })
         .then(res => {
             if (res.data.success) {
-                message.success("Qushildi");
+                hover?message.success("Uzgartrildi"):message.success("Qushildi");
                 getModels();
             }
         })
@@ -69,8 +69,9 @@ const Model = () => {
 
     const showModal = (city) => {
         console.log('Show modal for:', city);
+        setHover(item)
     };
-
+    
     return (
         <div className='model'>
             <input className='model-input' type="text" onChange={(e) => setName(e.target.value)} />
