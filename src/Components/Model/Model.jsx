@@ -120,12 +120,7 @@ const Model = () => {
                                 <td>{item.brand_title}</td>
                                 <td className='td'>
                                     <Button className='model-btn-a'onClick={() => showModal(item)}>Edit</Button> 
-                                    <Button 
-                                        className='model-btn-b' 
-                                        onClick={() => deleteModel(item.id)}
-                                    >
-                                        Delete
-                                    </Button>
+                                    <Button className='model-btn-b'onClick={() => deleteModel(item.id)}>Delete</Button>
                                 </td>
                             </tr>
                         ))
