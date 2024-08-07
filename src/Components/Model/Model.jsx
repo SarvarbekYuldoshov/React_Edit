@@ -8,7 +8,8 @@ const Model = () => {
     const [brands, setBrands] = useState([]); 
     const [name, setName] = useState('');
     const [brandid, setBrandid] = useState('');
-    const [hover,setHover] = useState(null)
+    const [hover, setHover] = useState(null);
+
     const getModels = () => {
         axios.get('https://autoapi.dezinfeksiyatashkent.uz/api/models')
             .then(res => setModels(res.data.data))
@@ -31,9 +32,13 @@ const Model = () => {
         const formData = new FormData();
         formData.append('name', name);
         formData.append('brand_id', brandid);
+
+        const url = hover ? `https://autoapi.dezinfeksiyatashkent.uz/api/models/${hover.id}` : `https://autoapi.dezinfeksiyatashkent.uz/api/models`;
+        const method = hover ? 'PUT' : 'POST';
+
         axios({
-            url:hover?`https://autoapi.dezinfeksiyatashkent.uz/api/models/${hover.id}`:`https://autoapi.dezinfeksiyatashkent.uz/api/models`,
-            method: hover? 'PUT':'POST',
+            url,
+            method,
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
             },
@@ -41,12 +46,15 @@ const Model = () => {
         })
         .then(res => {
             if (res.data.success) {
-                hover?message.success("Uzgartrildi"):message.success("Qushildi");
+                hover ? message.success("Updated successfully") : message.success("Added successfully");
+                setHover(null); 
+                setName(''); 
+                setBrandid(''); 
                 getModels();
             }
         })
         .catch(err => {
-            message.error("Xatolik");
+            message.error("Error occurred");
         });
     };
 
@@ -59,23 +67,33 @@ const Model = () => {
             },
         })
         .then(res => {
-            message.success("Uchirildi");
+            message.success("Deleted successfully");
             getModels();
         })
         .catch(err => {
-            message.error("Xatolik");
+            message.error("Error occurred");
         });
     };
 
-    const showModal = (city) => {
-        console.log('Show modal for:', city);
-        setHover(item)
+    const showModal = (item) => {
+        setHover(item);
+        setName(item.name);
+        setBrandid(item.brand_id);
     };
-    
+
     return (
         <div className='model'>
-            <input className='model-input' type="text" onChange={(e) => setName(e.target.value)} />
-            <select className='model-select' onChange={(e) => setBrandid(e.target.value)}>
+            <input 
+                className='model-input' 
+                type="text" 
+                value={name} 
+                onChange={(e) => setName(e.target.value)} 
+            />
+            <select 
+                className='model-select' 
+                value={brandid} 
+                onChange={(e) => setBrandid(e.target.value)}
+            >
                 <option value="">Select Brand</option>
                 {
                     brands && brands.map((brand, index) => (
@@ -83,7 +101,9 @@ const Model = () => {
                     ))
                 }
             </select>
-            <button className='model-btn' onClick={addModel}>Add</button>
+            <button className='model-btn' onClick={addModel}>
+                {hover ? 'Update' : 'Add'}
+            </button>
             <table>
                 <thead>
                     <tr>
@@ -99,8 +119,18 @@ const Model = () => {
                                 <td>{item.name}</td>
                                 <td>{item.brand_title}</td>
                                 <td className='td'>
-                                    <Button className='model-btn-a'  onClick={() => showModal(item)}>Edit</Button> 
-                                    <Button className='model-btn-b' onClick={() => deleteModel(item.id)}>Delete</Button>
+                                    <Button 
+                                        className='model-btn-a'  
+                                        onClick={() => showModal(item)}
+                                    >
+                                        Edit
+                                    </Button> 
+                                    <Button 
+                                        className='model-btn-b' 
+                                        onClick={() => deleteModel(item.id)}
+                                    >
+                                        Delete
+                                    </Button>
                                 </td>
                             </tr>
                         ))
@@ -112,6 +142,8 @@ const Model = () => {
 };
 
 export default Model;
+
+
 
 
 
