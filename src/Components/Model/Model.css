@@ -12,24 +12,26 @@ th,td{
     border: 1px solid blue;
     width: 250px;
     height: 40px;
-    margin-left: 2px;
+    /* margin-left: 2px; */
     text-align: center;
 }
 .model-select{
     border: 1px solid blue;
     width: 250px;
     height: 40px;
-    margin-left: 3px;
+    margin-left: 1px;
 }
 .model-btn{
     width: 250px;
     height: 40px;
     background: blue;
     color: #FFFF;
+    margin-left: 1px;
     border: 1px solid blue;
+    margin-bottom: 6px;
 }
 .model-btn:hover{
-    transform: scale(0.99);
+    transform: scale(0.98);
     transition: 1s;
     background: red;
     border: 1px solid #FFFF;
@@ -57,13 +59,13 @@ th,td{
     background-color: blue;
     color: #FFFF;
     border: 1px solid blue;
-    width: 125px;
+    width: 250px;
     border-radius: 1px;
 }
 .model-btn-b{
     background-color: red;
     border: 1px solid red;
-    width: 125px;
+    width: 250px;
     border-radius: 1px;
     color: #FFFF;
 }
