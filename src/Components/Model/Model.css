@@ -39,7 +39,7 @@ th,td{
 .model-input:hover{
     color: #FFFF;
     text-align: center;
-    transform: scale(0.99);
+    transform: scale(0.98);
     transition: 1s;
     background: blue;
     border: 1px solid #FFFF;
