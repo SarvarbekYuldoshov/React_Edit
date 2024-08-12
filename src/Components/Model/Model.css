@@ -46,7 +46,7 @@ th,td{
 }
 .model-select:hover{
     color: #FFFF;
-    transform: scale(0.99);
+    transform: scale(0.98);
     transition: 1s;
     background: blue;
     border: 1px solid #FFFF;
