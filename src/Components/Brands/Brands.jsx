@@ -8,7 +8,7 @@ const Brands = () => {
     const getBrands = () => {
         axios.get('https://autoapi.dezinfeksiyatashkent.uz/api/brands')
         .then(res => setBrands(res.data.data))
-        .catch(error => console.error('Error fetching brands:', error)); // Optional error handling
+        .catch(error => console.error('Error fetching brands:', error));
     };
 
     useEffect(() => {
@@ -30,6 +30,7 @@ const Brands = () => {
 };
 
 export default Brands;
+
 
 
 
