@@ -73,7 +73,7 @@ const Login = () => {
                         wrapperCol={{offset: 8,span: 16,
                         }}
                         >
-                    <Button className='logo-btn' htmlType="submit">Submi</Button>
+                    <Button className='logo-btn' htmlType="submit">Submit</Button>
                     </Form.Item>
                 </Form>
             </ul>
